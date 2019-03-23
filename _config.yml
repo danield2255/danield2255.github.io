@@ -124,12 +124,9 @@ author:
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
-    - label: "Git Hub"
+    - label: "GitHub"
       icon: "fab fa-fw fa-github"
        url: "https://github.com/danield2255"
-    - label: "Linkedin"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/daniel-d-b575b8106/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -296,11 +293,11 @@ defaults:
       comments: # true
       share: true
       related: true
-      
-  # _pages:
-  -scope:
-    path:""
+
+  #_page
+  -scope: 
+    path: ""
     type: pages
-   values: 
+  values: 
     layout: single
     author_profile: true
