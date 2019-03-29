@@ -19,14 +19,14 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="index.html" class="logo">Daniel DeFoe</a>
+						<a href="_pages/index.html" class="logo">Daniel DeFoe</a>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li><a href="index.html">Work and Projects</a></li>
-							<li class="active"><a href="about.html">About Me</a></li>
+							<li><a href="_pages/index.html">Work and Projects</a></li>
+							<li class="active"><a href="_pages/about.html">About Me</a></li>
 						</ul>
 						<ul class="icons">
 							<li><a href="https://www.linkedin.com/in/daniel-d-b575b8106/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
@@ -44,7 +44,75 @@
 									<h1>ANOVA Test</h1>
 								</header>
                                 <br>
-                                <embed src = "PortfoioContent/STAT 419 Final Report on Neural Network Usage.pdf" width="100%" height= "500" ></embed> 
+                                <p><strong>STAT 419 Final Project: Neural Networks</strong></p>
+<p><span style="font-weight: 400;">Daniel DeFoe, Markelle Kelly, Sadie Rhen</span></p>
+<p>&nbsp;</p>
+<p><strong>ABSTRACT.</strong></p>
+<p><span style="font-weight: 400;">Currently the world of machine learning gives statisticians and data scientists a plethora of tools and models to choose from when it comes to analyzing data and making predictions. With all of these choices at the disposal of professionals, neural networks have emerged as a powerful tool for data classification and outcome prediction. Modeling with neural networks has significantly advanced our power to make sense of large datasets and draw meaningful, increasingly accurate conclusions. Neural network architecture is behind the advancement of modern technological breakthroughs such as image and audio recognition. </span></p>
+<p><span style="font-weight: 400;">The following report aims to describe and portray how a neural network can classify image data. This will be done using Python&rsquo;s Keras package with tensorflow. The general structure of the network will be discussed, including its layers, in terms of our data set. The produced model will then be broken down through evaluation of our findings and reflection upon our results. </span></p>
+<p><span style="font-weight: 400;">&nbsp;</span></p>
+<ol>
+<li><strong> INTRODUCTION</strong></li>
+</ol>
+<p><span style="font-weight: 400;">The data used to investigate how to build and develop a neural network are images of articles of clothing from the popular &ldquo;Fashion-MNIST&rdquo; dataset, obtained from Zalando Research on GitHub. Each observation is a 28x28 pixel black and white image classified as one of 10 possible types of clothing articles. Each image is classified as a t-shirt/top, trouser, pullover, dress, coat, sandal, shirt, sneaker, bag, or ankle boot. To describe each image, the neural network considers its pixels, counted horizontally row by row. This means that pixel 29 is in the 2nd row, in the 0th column. There are 784 total columns representing the pixels by their darkness, measured on a scale of 1 to 255. There are a total of 70,000 observations (images) in the dataset. </span></p>
+<p>&nbsp;</p>
+<p><em><span style="font-weight: 400;">Why Neural Networks?</span></em></p>
+<p><span style="font-weight: 400;">Convolutional neural networks are one of the most effective strategies for image and pattern recognition and classification. Their convolutional layers, which will be discussed in detail in the next section, allow them to reliably identify patterns and features in images. Additionally, the way neural networks consider different variables and their relationships make them an ideal way to deal with sets of variables that are related in specific ways, like the sets of pixels comprising images.</span></p>
+<p>&nbsp;</p>
+<ol start="2">
+<li><strong> NEURAL NETWORK CREATION</strong></li>
+</ol>
+<p><em><span style="font-weight: 400;">Neural Network Layers</span></em></p>
+<p><span style="font-weight: 400;">The Keras package for Python used to create the network employs a sequential model, so it allows the model to be defined and built layer by layer.</span> <span style="font-weight: 400;">The input layer to the network consists of the data&rsquo;s features as described in the introduction. Collectively the data set&rsquo;s variables serve as predictors, with each pixel assuming the role of a single input node, for a total of 784 nodes. </span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">The hidden layers of the network include different types of layers with various functions that essentially comprise the entire model. It is important to note that the creation of the series of hidden layers is largely synonymous with the creation of the model. The number and nature of these layers plays a significant role in the model&rsquo;s ability to correctly classify data. The model used for the Fashion-MNIST data was a two dimensional convolutional neural network, so the first layer was a convolutional layer. This layer uses a filter referred to as a kernel to go through the input image, one section at a time, grouping the pixels into receptive fields. For each position on the image, weights assigned to the previously determined groups of pixels are multiplied by each pixel to essentially determine importance by area. </span><span style="font-weight: 400;">Convolutional layer filters act as feature identifiers - the element wise multiplications will increase dramatically if there is a pattern in parts of the image that match the filter. </span><span style="font-weight: 400;">These element wise multiplications end up being represented in a single array of numbers called a feature map. The more kernels there are, the better the network can capture differences between groups of pixels. After this first layer, we added another convolutional layer, then two dense layers. The dense layers conduct operations on the preceding layer, using the calculated weights to connect each node to each neuron in the next layer, further down the network, with updated values based on the weights.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">It should be noted that in the defining of the hidden layers, a max-pooling aggregation was applied as well as two dropout functions. Max-pooling helps prevent overfitting by aggregating the maximums of each feature group after the convolutional layers. The dropout functions also help prevent overfitting by setting a portion (for our model, 25%, then 50%) of the activations of a given layer to zero during each step of model training. For further detail on the exact model we used, see our Keras code in the appendix.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Finally, the output layer, containing 10 nodes, contains the neural network&rsquo;s prediction of what the first column of the data, the image classification, should be. From the computing done in the series of hidden layers, the model makes a prediction for each observation of what kind of clothing article the image is. To represent this, one of the 10 nodes, each of which correspond to one of our 10 original categories, will have a value of 1, and the rest will have a value of 0 (the node with 1 representing the predicted category). We saved these predictions for further analysis of which categories our network was most frequently getting wrong (discussed in the next section).</span></p>
+<p>&nbsp;</p>
+<p><em><span style="font-weight: 400;">Model Training</span></em></p>
+<p><span style="font-weight: 400;">We trained our neural network on 60,000 of the 70,000 total images, leaving 10,000 for testing the model.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">In order for the network to classify the data properly, the weights and biases of each layer need to be optimized. In order to do this, neural networks need a cost function and optimization algorithm. When a single piece of training data is run through the unoptimized model, the value of each output node is compared to what was expected, generally one for the category to which the piece of training data belongs and zero for all other categories. Popular cost functions include mean square error, cross entropy, and absolute error; we used a categorical cross entropy loss function, which determines the difference between the true and observed probability distributions; minimizing cross entropy maximizes the log likelihood. Since this cost function will be small when the output nodes are close to their expected value, minimizing this cost function by adjusting the weights and bias of each layer of the network will reduce the overall error in the network. </span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">To perform this optimization, we used Adadelta, a gradient descent algorithm, which applies the negative gradient of the cost function to all of the weights and biases in a layer. This reveals how much each piece should be adjusted in order to decrease the cost function by the greatest amount. Then, this process is repeated for each layer, optimizing the entire network. </span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Since the entire training data set of 60,000 points (one epoch) cannot be run through the network all at once, a cost function and corresponding gradient was computed for batches of 128 points at a time, and the network&rsquo;s weights and biases were optimized based on that. Batches were run until all 60,000 points had been used, and the first epoch was completed. Since only running through the training data once tends to underfit the data, multiple epochs need to be run in order to increase the accuracy of the network. However, running too many epochs can overfit the network to the specific training data, making it less accurate when classifying new data that is not from the training set. By 12 epochs, the increases in accuracy were smaller than .005 per step, and the network had an overall accuracy of .9406 for the training data, so training was considered to be complete. The specific performance of each epoch is included in the appendix. </span></p>
+<p>&nbsp;</p>
+<p><em><span style="font-weight: 400;">Model Evaluation</span></em></p>
+<p><span style="font-weight: 400;">We then evaluated our model based on our test set of 10,000 additional images. Within the training, we brought our loss down from 0.5684 to 0.1660, and increased our accuracy from .7978 after the first epoch to .9406. When we evaluated our neural network with the test data, it achieved a loss of .214 and an accuracy of .9267. </span></p>
+<p><br /><br /><br /><br /><br /><br /><br /><br /></p>
+<ol start="3">
+<li><strong> FINDINGS</strong></li>
+</ol>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Figure 1 shows the general accuracy of the predictions provided by the network when run using a single epoch. This makes it easy to visualize which articles are incorrectly classified, and why that may be. The confusion matrix shows that the articles most commonly classified incorrectly are shirts, with only 58.6% of them correctly identified. However, this category makes sense as a problematic one; these shirts were most frequently mistaken for t-shirts/tops, pullovers, and coats. These are very similar articles of clothing, with very similar features (comparable shape, visual nature of having sleeves), and this makes it understandable that the network would have trouble consistently classifying them - even humans could have trouble distinguishing shirts from tops. (In this data set, shirts are nicer blouses, while tops are more casual). The articles with the highest proportion correctly classified were trousers and bags, each at 96.8% correct, which makes sense because each of these items has its own unique features. Trousers are the only pant item being classified and bags have a very distinct shape compared to the other items, which are all physically worn on the body. These distinctive visual features allow trousers and bags to be effectively classified by this somewhat limited neural network.</span></p>
+<p><span style="font-weight: 400;">Figure 2 is the same confusion matrix as Figure 1, but recreated after running all 12 epochs. The increased accuracy for every category shows the benefit of running multiple epochs. Going through the same training data multiple times significantly improved our accuracy on the test data. Shirts are still the most frequently misclassified, but now over 75% of them are correctly identified, a significant improvement from 58.6% after a single epoch. Our neural network is most accurate for trousers, sandals, sneakers, and bags.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Just by looking at the clear diagonal lines in both confusion matrices, one can conclude that our neural network is closely matching reality, and is a fairly reliable indicator of an image&rsquo;s true clothing classification.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">While near 93% accuracy is impressive for a relatively simple model, we could always work to improve our neural network by expanding the hidden layer. According to the dataset&rsquo;s GitHub page, other convolutional neural networks have achieved up to 95% accuracy. To improve our model, we would consider adding another convolutional or dense layer, or pre-processing the data. This page also lists benchmarks for other types of classifiers, including SVC, random forests, and K-neighbors, which all have accuracies in the mid 80 percents, so neural networks appear to be an optimal way to classify this dataset.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">It is worth noting that in the modern age, there is often a heightened importance placed on the accuracy of neural network models when it comes to certain systems, especially in the field of image recognition. Artificial intelligence utilizing neural networks is becoming increasingly responsible for the maintenance of systems pertaining to safety and security. To cite a few examples, self driving cars interpreting the highly variable surrounding world require very high accuracy to be able to safely navigate the road, and facial recognition to unlock modern smartphones is often the only barrier between a potential predator and someone&rsquo;s private information. It is in systems such as this that networks must be built with much more extensive and powerful hidden layers to increase overall accuracy. It is imperative for the prediction of these networks to be reliable in order to protect users and coexisting entities. </span></p>
+<p>&nbsp;</p>
+<ol start="4">
+<li><strong> REFERENCES </strong></li>
+</ol>
+<p><span style="font-weight: 400;">3Blue1Brown. &ldquo;But What *Is* a Neural Network? | Chapter 1, Deep Learning.&rdquo; </span><em><span style="font-weight: 400;">YouTube</span></em><span style="font-weight: 400;">, YouTube, 5 Oct. 2017, www.youtube.com/watch?v=aircAruvnKk.</span></p>
+<p><span style="font-weight: 400;">3Blue1Brown. &ldquo;Gradient Descent, How Neural Networks Learn | Chapter 2, Deep Learning.&rdquo; </span><em><span style="font-weight: 400;">YouTube</span></em><span style="font-weight: 400;">, YouTube, 16 Oct. 2017, www.youtube.com/watch?v=IHZwWFHWa-w.</span></p>
+<p><span style="font-weight: 400;">Clabaugh, Caroline, et al. &ldquo;Neural Networks - History.&rdquo; </span><em><span style="font-weight: 400;">Neural Networks</span></em><span style="font-weight: 400;">, 2000, cs.stanford.edu/people/eroberts/courses/soco/projects/neural-networks/History/history1.html.</span></p>
+<p><span style="font-weight: 400;">Izenman, Alan Julian. </span><em><span style="font-weight: 400;">Modern Multivariate Statistical Techniques: Regression, Classification, and Manifold Learning</span></em><span style="font-weight: 400;">. Springer, 2013.</span></p>
+<p><span style="font-weight: 400;">Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747.</span></p>
+<p><span style="font-weight: 400;">github.com/zalandoresearch/fashion-mnist</span></p>
+<p><span style="font-weight: 400;">Sharma, Sagar. &ldquo;Epoch vs Batch Size vs Iterations &ndash; Towards Data Science.&rdquo; </span><em><span style="font-weight: 400;">Towards Data Science</span></em><span style="font-weight: 400;">, 22 Sept. 2017, towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9.</span></p>
+<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+<p><span style="font-weight: 400;"></span></p>
+<ol start="5">
+<li><strong> APPENDIX </strong></li>
+</ol>
+<p><span style="font-weight: 400;">Figure 3. Output for our neural network </span></p>
+<p><span style="font-weight: 400;">Figure 4. Our model code in Keras</span></p>
                                 </br>
 							</section>
 
