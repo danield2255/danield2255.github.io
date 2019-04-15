@@ -4655,6 +4655,7 @@ input, select, textarea {
     .resp-container {
         position: relative;
         overflow: hidden;
+        padding-top: 56.25%;
     }
 
     .resp-iframe {
